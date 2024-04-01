@@ -1,0 +1,116 @@
+body, html {
+    height: 100%;
+}
+body {
+    font-family: sans-serif;
+}
+.flex-box {
+    display: flex;
+}
+.flex-box-center {
+    align-items: center;
+    justify-content: center;
+}
+.game-title {
+    color: white;
+}
+.game-title-box {
+    background-color: darkslategrey;
+    border-radius: 100px;
+    text-align: center;
+}
+.parent-box {
+    background-color: brown;
+    box-shadow: 0 0 2px 2px brown;
+    height: max-content;
+    border-radius: 100px;
+    flex-direction: column;
+    padding: 20px;
+    gap: 1rem;
+}
+.game-parent-box {
+    justify-content: space-evenly;
+    flex-direction: row;
+}
+.game-box {
+    flex-direction: column;
+    gap: 1rem;
+}
+.input-field {
+    width: 90px;
+    height: 110px;
+    font-size: 4rem;
+    text-align: center;
+    border: none;
+    outline: none;
+    border-bottom: solid 5px darkslategrey;
+    color: darkslategrey;
+}
+.input-fields-row {
+    flex-direction: row;
+    gap: 1rem;
+}
+.game-left-box {
+    flex-direction: column;
+    gap: 1rem;
+}
+.button {
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1.5rem;
+    width: 150px;
+    height: 50px;
+    border: none;
+    color: white;
+    font-weight: bolder;
+    transition: 0.5s box-shadow, background-color;
+}
+.button:hover {
+    background-color: darkslategrey;
+    box-shadow: 0 0 2px 2px darkslategrey;
+}
+.restart-button {
+    background-color: red;
+}
+.submit-button {
+    background-color: green;
+}
+.hint-button {
+    background-color: blue;
+}
+.buttons-box {
+    flex-direction: row;
+    gap: 1rem;
+    justify-content: center;
+}
+.input-field-disabled {
+    background-color: gray;
+    pointer-events: none;
+}
+.input-field-enabled {
+    background-color: white;
+    pointer-events: all;
+}
+.try-number-label {
+    color: white;
+}
+.sub-title {
+    color: white;
+}
+.rule-box {
+    width: 50px;
+    height: 50px;
+}
+.game-rules-box {
+    flex-direction: column;
+}
+.rule-parent-box {
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+}
+#word-box {
+    font-size: 1.5rem;
+    font-weight: bolder;
+    color: white;
+}

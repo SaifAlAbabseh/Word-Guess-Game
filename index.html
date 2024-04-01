@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Word Guess Game</title>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+    <div class="parent-box flex-box">
+        <div class="game-title-box flex-box-center">
+            <h1 class="game-title">
+                Word Guess Game
+            </h1>
+        </div>
+        <div class="game-parent-box flex-box">
+            <div class="game-left-box flex-box">
+                <div class="game-box flex-box" id="game-box">
+                </div>
+                <div class="buttons-box flex-box">
+                    <button class="button restart-button" id="restart-button">RESTART</button>
+                    <button class="button submit-button" id="submit-button">SUBMIT</button>
+                    <button class="button hint-button" id="hint-button">HINTS: <label id="number-of-hints"></label></button>
+                </div>
+            </div>
+            <div class="game-rules-box flex-box">
+                <h2 class="sub-title">Letter Colors:</h2>
+                <h2 class="rule-parent-box flex-box" style="color:green">
+                    <div class="rule-box" style="background-color: green;"></div>
+                    Correct Letter And In The Correct Place
+                </h2>
+                <h2 class="rule-parent-box flex-box">
+                    <div class="rule-box" style="background-color: black;"></div>
+                    Wrong Letter And doesn't exist
+                </h2>
+                <h2 class="rule-parent-box flex-box" style="color:orange">
+                    <div class="rule-box" style="background-color: orange;"></div>
+                    Correct Letter But In The Wrong Place
+                </h2>
+                <div id="word-box">
+                </div>
+            </div>
+        </div>
+        <div class="game-title-box flex-box-center">
+            <h1 class="game-title">
+                Developed By: Saif AlAbabseh
+            </h1>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
