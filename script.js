@@ -37,6 +37,30 @@ function getWord() {
     xmlhttp.send();
 }
 
+function moveLeft(colNum, rowNum) {
+    if (colNum > 1) {
+        for (let index = colNum - 1; index >= 1; index--) {
+            if (!document.getElementById(rowNum + "-" + index).classList.contains("input-field-disabled")) {
+                let newId = rowNum + "-" + index;
+                document.getElementById(newId).focus();
+                break;
+            }
+        }
+    }
+}
+
+function moveRight(colNum, rowNum) {
+    if (colNum < wordLength) {
+        for (let index = colNum + 1; index <= wordLength; index++) {
+            if (!document.getElementById(rowNum + "-" + index).classList.contains("input-field-disabled")) {
+                let newId = rowNum + "-" + index;
+                document.getElementById(newId).focus();
+                break;
+            }
+        }
+    }
+}
+
 function initGameBox() {
     let gameBox = document.getElementById("game-box");
     for (let row = 1; row <= numberOfTries; row++) {
@@ -55,88 +79,25 @@ function initGameBox() {
             inputField.autocomplete = "off";
             inputField.addEventListener("keyup", function (event) {
 
-                if (event.key == "Tab") {
-                    if (this.classList.contains("input-field-disabled")) this.blur();
-                }
-                else if (event.key == "ArrowLeft" || event.key == "ArrowRight" || event.key == "Backspace") {
-                    let indexes = ("" + this.id).split("-");
-                    let rowNum = Number(indexes[0]);
-                    let colNum = Number(indexes[1]);
-                    if (event.key == "ArrowLeft") {
-                        if (colNum > 1) {
-                            for (let index = colNum - 1; index >= 1; index--) {
-                                if (document.getElementById(rowNum + "-" + index).style.backgroundColor != "green") {
-                                    let newColNum = colNum - 1;
-                                    let newId = rowNum + "-" + newColNum;
-                                    document.getElementById(newId).focus();
-                                    break;
-                                }
-                                else {
-                                    let newColNum = colNum - 2;
-                                    if (newColNum >= 1) {
-                                        let newId = rowNum + "-" + newColNum;
-                                        document.getElementById(newId).focus();
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    else if (event.key == "ArrowRight") {
-                        if (colNum < wordLength) {
-                            for (let index = colNum + 1; index <= wordLength; index++) {
-                                if (document.getElementById(rowNum + "-" + index).style.backgroundColor != "green") {
-                                    let newId = rowNum + "-" + index;
-                                    document.getElementById(newId).focus();
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    else if(event.key == "Backspace") {
-                        this.value = "";
-                        if (colNum > 1) {
-                            for (let index = colNum - 1; index >= 1; index--) {
-                                if (document.getElementById(rowNum + "-" + index).style.backgroundColor != "green") {
-                                    let newColNum = colNum - 1;
-                                    let newId = rowNum + "-" + newColNum;
-                                    document.getElementById(newId).focus();
-                                    break;
-                                }
-                                else {
-                                    let newColNum = colNum - 2;
-                                    if (newColNum >= 1) {
-                                        let newId = rowNum + "-" + newColNum;
-                                        document.getElementById(newId).focus();
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-                    }
+                let indexes = ("" + this.id).split("-");
+                let rowNum = Number(indexes[0]);
+                let colNum = Number(indexes[1]);
+
+                if (event.key == "Tab" || event.key == "ArrowLeft" || event.key == "ArrowRight" || event.key == "Backspace") {
+                    if (event.key == "Tab") if (this.classList.contains("input-field-disabled")) this.blur();
+                    if (event.key == "ArrowLeft" || event.key == "Backspace") moveLeft(colNum, rowNum);
+                    else if (event.key == "ArrowRight") moveRight(colNum, rowNum);
                 }
                 else if ((("" + this.value).charCodeAt(0) >= 65 && ("" + this.value).charCodeAt(0) <= 90) || (("" + this.value).charCodeAt(0) >= 97 && ("" + this.value).charCodeAt(0) <= 122)) {
                     if (this.value.length > 1) this.value = ("" + this.value).substring(0, this.value.length - 1);
                     let upperCaseText = ("" + this.value).toUpperCase();
                     this.value = upperCaseText;
-                    let indexes = ("" + this.id).split("-");
-                    let rowNum = Number(indexes[0]);
-                    let colNum = Number(indexes[1]);
-                    if (colNum < wordLength) {
-                        for (let index = colNum + 1; index <= wordLength; index++) {
-                            if (document.getElementById(rowNum + "-" + index).style.backgroundColor != "green") {
-                                let newId = rowNum + "-" + index;
-                                document.getElementById(newId).focus();
-                                break;
-                            }
-                        }
-                    }
+                    moveRight(colNum, rowNum);
                 }
                 else this.value = "";
             });
             if (row > 1) inputField.classList.add("input-field-disabled");
             else inputField.classList.add("input-field-enabled");
-
             inputFieldsRow.appendChild(inputField);
         }
         gameBox.appendChild(inputFieldsRow);

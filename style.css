@@ -3,6 +3,7 @@ body, html {
 }
 body {
     font-family: sans-serif;
+    user-select: none;
 }
 .flex-box {
     display: flex;
