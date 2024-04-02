@@ -12,6 +12,7 @@ let restartButton = document.getElementById("restart-button");
 let submitButton = document.getElementById("submit-button");
 let hintButton = document.getElementById("hint-button");
 let hintLabel = document.getElementById("number-of-hints");
+let wordBox = document.getElementById("word-box");
 
 // Functions
 
@@ -57,6 +58,26 @@ function moveRight(colNum, rowNum) {
                 break;
             }
         }
+    }
+}
+
+function endGame(endMessage) {
+    submitButton.style.pointerEvents = "none";
+    submitButton.style.backgroundColor = "gray";
+    hintButton.style.pointerEvents = "none";
+    hintButton.style.backgroundColor = "gray";
+    wordBox.innerHTML = endMessage + word;
+}
+
+function checkLetters(isEnd, index) {
+    let inputField = document.getElementById((currentTryNumber - isEnd) + "-" + index);
+    inputField.classList.remove("input-field-enabled");
+    inputField.classList.add("input-field-disabled");
+    if (inputField.value === "") inputField.style.backgroundColor = "black"
+    else {
+        if (word.includes(inputField.value) && ("" + word.charAt(index - 1)) === inputField.value) inputField.style.backgroundColor = "green";
+        else if (word.includes(inputField.value) && ("" + word.charAt(index - 1)) !== inputField.value) inputField.style.backgroundColor = "orange";
+        else inputField.style.backgroundColor = "black";
     }
 }
 
@@ -117,24 +138,12 @@ function submitGuess() {
         for (let index = 1; index <= wordLength; index++) {
             let inputField = document.getElementById(currentTryNumber + "-" + index);
             userInput += inputField.value;
-            inputField.classList.remove("input-field-enabled");
-            inputField.classList.add("input-field-disabled");
-            if (inputField.value === "") inputField.style.backgroundColor = "black"
-            else {
-                if (word.includes(inputField.value) && ("" + word.charAt(index - 1)) === inputField.value) inputField.style.backgroundColor = "green";
-                else if (word.includes(inputField.value) && ("" + word.charAt(index - 1)) !== inputField.value) inputField.style.backgroundColor = "orange";
-                else inputField.style.backgroundColor = "black";
-            }
+            checkLetters(0, index);
         }
         currentTryNumber++;
         if (word === userInput) {
             isWin = true;
-            let wordBox = document.getElementById("word-box");
-            wordBox.innerHTML = "You Won :) the word is: " + word;
-            submitButton.style.pointerEvents = "none";
-            submitButton.style.backgroundColor = "gray";
-            hintButton.style.pointerEvents = "none";
-            hintButton.style.backgroundColor = "gray";
+            endGame("You Won :) the word is: ");
         }
         else {
             if (currentTryNumber != numberOfTries + 1) {
@@ -153,24 +162,9 @@ function submitGuess() {
             }
         }
     }
-    if(currentTryNumber == 6 && !isWin) {
-        for (let index = 1; index <= wordLength; index++) {
-            let inputField = document.getElementById((currentTryNumber - 1) + "-" + index);
-            inputField.classList.remove("input-field-enabled");
-            inputField.classList.add("input-field-disabled");
-            if (inputField.value === "") inputField.style.backgroundColor = "black"
-            else {
-                if (word.includes(inputField.value) && ("" + word.charAt(index - 1)) === inputField.value) inputField.style.backgroundColor = "green";
-                else if (word.includes(inputField.value) && ("" + word.charAt(index - 1)) !== inputField.value) inputField.style.backgroundColor = "orange";
-                else inputField.style.backgroundColor = "black";
-            }
-        }
-        submitButton.style.pointerEvents = "none";
-        submitButton.style.backgroundColor = "gray";
-        hintButton.style.pointerEvents = "none";
-        hintButton.style.backgroundColor = "gray";
-        let wordBox = document.getElementById("word-box");
-        wordBox.innerHTML = "You Lost :( the correct word was: " + word;
+    if (currentTryNumber == 6 && !isWin) {
+        for (let index = 1; index <= wordLength; index++) checkLetters(1, index);
+        endGame("You Lost :( the correct word was: ");
     }
 }
 
