@@ -100,7 +100,7 @@ function initGameBox() {
                     let indexes = ("" + this.id).split("-");
                     let rowNum = Number(indexes[0]);
                     let colNum = Number(indexes[1]);
-                    if (colNum < 5) {
+                    if (colNum < wordLength) {
                         for (let index = colNum + 1; index <= wordLength; index++) {
                             if (document.getElementById(rowNum + "-" + index).style.backgroundColor != "green") {
                                 let newId = rowNum + "-" + index;
