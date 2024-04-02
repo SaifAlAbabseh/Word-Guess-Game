@@ -31,6 +31,7 @@ function getWord() {
         if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
             let json = JSON.parse(this.responseText);
             word = json[0].toUpperCase();
+            console.log(word);
         }
     };
     xmlhttp.send();
@@ -88,6 +89,27 @@ function initGameBox() {
                                     let newId = rowNum + "-" + index;
                                     document.getElementById(newId).focus();
                                     break;
+                                }
+                            }
+                        }
+                    }
+                    else if(event.key == "Backspace") {
+                        this.value = "";
+                        if (colNum > 1) {
+                            for (let index = colNum - 1; index >= 1; index--) {
+                                if (document.getElementById(rowNum + "-" + index).style.backgroundColor != "green") {
+                                    let newColNum = colNum - 1;
+                                    let newId = rowNum + "-" + newColNum;
+                                    document.getElementById(newId).focus();
+                                    break;
+                                }
+                                else {
+                                    let newColNum = colNum - 2;
+                                    if (newColNum >= 1) {
+                                        let newId = rowNum + "-" + newColNum;
+                                        document.getElementById(newId).focus();
+                                        break;
+                                    }
                                 }
                             }
                         }
