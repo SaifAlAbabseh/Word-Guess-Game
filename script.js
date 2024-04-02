@@ -122,9 +122,7 @@ function submitGuess() {
             if (inputField.value === "") inputField.style.backgroundColor = "black"
             else {
                 if (word.includes(inputField.value) && ("" + word.charAt(index - 1)) === inputField.value) inputField.style.backgroundColor = "green";
-                else if (word.includes(inputField.value) && ("" + word.charAt(index - 1)) !== inputField.value) {
-                    inputField.style.backgroundColor = "orange";
-                }
+                else if (word.includes(inputField.value) && ("" + word.charAt(index - 1)) !== inputField.value) inputField.style.backgroundColor = "orange";
                 else inputField.style.backgroundColor = "black";
             }
         }
