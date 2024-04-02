@@ -31,7 +31,6 @@ function getWord() {
         if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
             let json = JSON.parse(this.responseText);
             word = json[0].toUpperCase();
-            console.log(word);
         }
     };
     xmlhttp.send();
