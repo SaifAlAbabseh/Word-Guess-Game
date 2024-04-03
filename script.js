@@ -69,7 +69,7 @@ function endGame(endMessage) {
     wordBox.innerHTML = endMessage + word;
 }
 
-function checkLetters(isEnd, index) {
+function checkLetter(isEnd, index) {
     let inputField = document.getElementById((currentTryNumber - isEnd) + "-" + index);
     inputField.classList.remove("input-field-enabled");
     inputField.classList.add("input-field-disabled");
@@ -138,7 +138,7 @@ function submitGuess() {
         for (let index = 1; index <= wordLength; index++) {
             let inputField = document.getElementById(currentTryNumber + "-" + index);
             userInput += inputField.value;
-            checkLetters(0, index);
+            checkLetter(0, index);
         }
         currentTryNumber++;
         if (word === userInput) {
@@ -163,7 +163,7 @@ function submitGuess() {
         }
     }
     if (currentTryNumber == 6 && !isWin) {
-        for (let index = 1; index <= wordLength; index++) checkLetters(1, index);
+        for (let index = 1; index <= wordLength; index++) checkLetter(1, index);
         endGame("You Lost :( the correct word was: ");
     }
 }
