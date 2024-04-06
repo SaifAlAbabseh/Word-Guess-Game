@@ -88,6 +88,7 @@ function initGameBox() {
         inputFieldsRow.classList.add("flex-box");
         inputFieldsRow.classList.add("input-fields-row");
         let tryNumberLabel = document.createElement("h2");
+        tryNumberLabel.id = "try-" + row;
         tryNumberLabel.innerHTML = "TRY #" + row;
         tryNumberLabel.classList.add("try-number-label");
         inputFieldsRow.appendChild(tryNumberLabel);
@@ -116,8 +117,14 @@ function initGameBox() {
                 }
                 else this.value = "";
             });
-            if (row > 1) inputField.classList.add("input-field-disabled");
-            else inputField.classList.add("input-field-enabled");
+            if (row > 1) {
+                inputField.classList.add("input-field-disabled");
+                tryNumberLabel.style.color = "gray";
+            }
+            else {
+                inputField.classList.add("input-field-enabled");
+                tryNumberLabel.style.color = "white";
+            }
             inputFieldsRow.appendChild(inputField);
         }
         gameBox.appendChild(inputFieldsRow);
@@ -140,6 +147,8 @@ function submitGuess() {
             userInput += inputField.value;
             checkLetter(0, index);
         }
+        let tryNumberLabel = document.getElementById("try-" + currentTryNumber);
+        tryNumberLabel.style.color = "gray";
         currentTryNumber++;
         if (word === userInput) {
             isWin = true;
@@ -147,6 +156,8 @@ function submitGuess() {
         }
         else {
             if (currentTryNumber != numberOfTries + 1) {
+                let tryNumberLabel = document.getElementById("try-" + currentTryNumber);
+                tryNumberLabel.style.color = "white";
                 for (let index = 1; index <= wordLength; index++) {
                     let prevInputField = document.getElementById((currentTryNumber - 1) + "-" + index);
                     let inputField = document.getElementById(currentTryNumber + "-" + index);
