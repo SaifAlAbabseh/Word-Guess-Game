@@ -199,6 +199,14 @@ function putHint() {
     inputField.classList.add("input-field-disabled");
     inputField.style.backgroundColor = "green";
     inputField.value = word.charAt(hintPlace - 1);
+    let isAll = true;
+    for(let i = 1; i <= wordLength; i++) {
+        if (!document.getElementById(currentTryNumber + "-" + i).classList.contains("input-field-disabled")) isAll = false;
+    }
+    if(isAll) {
+        isWin = true;
+        endGame("You Won :) the word is: ");
+    }
 }
 
 // Listeners
