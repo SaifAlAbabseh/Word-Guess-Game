@@ -26,15 +26,14 @@ function loadPage() {
 }
 
 function getWord() {
-    let xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("GET", "https://random-word-api.herokuapp.com/word?length=" + wordLength + "&lang=" + language, false);
-    xmlhttp.onreadystatechange = function () {
-        if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-            let json = JSON.parse(this.responseText);
-            word = json[0].toUpperCase();
-        }
-    };
-    xmlhttp.send();
+    fetch("https://random-word-api.herokuapp.com/word?length=" + wordLength + "&lang=" + language)
+    .then(response => {
+        response.text()
+        .then( data => {
+            let jsonData = JSON.parse(data);
+            word = jsonData[0].toUpperCase();
+        })
+    })
 }
 
 function moveLeft(colNum, rowNum) {
